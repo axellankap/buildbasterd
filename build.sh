@@ -19,9 +19,16 @@ tar xf gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux.tar.xz
 #export CC="${PWD}/gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux/bin/arm-linux-gnueabihf-"
 export PATH="${PWD}/gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux/bin":"${PATH}"
 
+which arm-linux-gnueabihf-gcc
+arm-linux-gnueabihf-gcc --version
+
+#checkout Linux
 export LINUX_SRC=CHIP-linux
 export LINUX_BRANCH=debian/4.3.0-5
 git clone -b "${LINUX_BRANCH}" --single-branch --depth 1 https://github.com/NextThingCo/CHIP-linux
+
+# Build Linux .deb
+cd CHIP-linux
 
 export ARCH=arm
 export KBUILD_DEBARCH=armhf
