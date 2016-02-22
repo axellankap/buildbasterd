@@ -45,3 +45,31 @@ export DEBEMAIL="${GIT_USER}@github.com"
 make -j8 deb-pkg
 
 ls -ltra
+
+
+# build RTL8723BS source package
+mkdir ~/build_wifi_deb
+cd ~/build_wifi_deb
+git clone  https://github.com/NextThingCo/RTL8723BS
+cd ~/build_wifi_deb/RTL8723BS
+git checkout -b debian origin/debian
+dpkg-buildpackage -A -uc -us -nc
+
+# install RTL8723BS source package
+sudo dpkg -i ~/build_wifi_deb/rtl8723bs-mp-driver-source_4.3.16-13854.20150410-BTCOEX20150119-5844-ntc-2_all.deb
+
+#cross build .deb for RTL8723BS
+mkdir -p ~/build_wifi_deb/build/usr_src
+export BUILDDIR=~/build_wifi_deb/build
+export CC=arm-linux-gnueabihf-gcc
+export $(dpkg-architecture -aarmhf)
+export CROSS_COMPILE=arm-linux-gnueabihf-
+export KERNEL_VER=$(cd $KERNEL_SRC; make kernelversion)
+
+cp -a /usr/src/modules/rtl8723bs-mp-driver ~/build_wifi_deb/build
+cd  ~/build_wifi_deb/build/usr_src/modules/rtl8723bs-mp-driver
+
+m-a -t -u $BUILDDIR \
+  -l $KERNEL_VER \
+  -k $KERNEL_SRC \
+  build rtl8723bs-mp-driver-source
