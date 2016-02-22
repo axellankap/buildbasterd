@@ -47,6 +47,9 @@ make -j8 deb-pkg
 ls -ltra
 
 
+# install dependencies for RTL8723BS source package
+sudo apt-get -y install debhelper modules-assistant
+
 # build RTL8723BS source package
 mkdir ~/build_wifi_deb
 cd ~/build_wifi_deb
