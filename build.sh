@@ -45,6 +45,7 @@ export DEBEMAIL="${GIT_USER}@github.com"
 
 make -j8 deb-pkg
 
+echo "**** PWD=$PWD"
 ls -l ../*deb
 
 # install dependencies for RTL8723BS source package
@@ -75,5 +76,5 @@ cp -va /usr/src/modules/rtl8723bs-mp-driver/* ~/build_wifi_deb/build
 
 m-a -t -u $BUILDDIR -l $KERNEL_VER -k $LINUX_SRC build rtl8723bs-mp-driver-source
 
-echo $PWD
+echo "**** PWD=$PWD"
 ls -l ../*deb

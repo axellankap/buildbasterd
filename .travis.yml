@@ -13,13 +13,10 @@ deploy:
   provider: releases
   api_key:
     secure: HivKVk4jW7RQtnuIV1YEVZbjB4AjyH7wk/KLQOKG8b4remoHoGydeTg63RBgiM9m5TAkTEJCzDX6x5pLRu76JOx7UU508HQR2hZo9Z6mZaPdbxKTtVyW6EbqiM13TOvHIFISjhXvsf+RgHftKRRPhyTmLiZQpdOh3HuidSeZSAdxHG1c8HCbjRhMtUrUJrh3t6QnP3uIHNv2DnBnkA063zk/qlwe5zySISkOOUfeZ7JFfL8l4piJZ3ApcWgIL+nNoTSHC6Cb3pBESfx78WT81BFACfDSujq+HQKHxNKHqxZxGP/oMYZ3/+6tzxnFcsQghFExubG0COJePokZHvh2CHUxQxNQUlqRYIUy61KGYv7vElY+yJ3WNCrB9yE5pL8FwHvVnmdx3gNkI+Hc15GVPPIWWkrARCBk+WTONkM0uUeSRkNZj6QC1/te3q1wl77hu0z4prbf66ffR5yZVuAwa5D32DRtcRm6AyPcT0dCh6dGSbqxPGp1+zSqDnuuKumj+wsll+Lc5ewBM6p7gGvnR4KpzeaZteTmT81WehbocCOzGZBmFvcSCkoR+lUyiG/7t7BknI+fj29dWipYv6+PtSrBIBXioxhyGSf1g48/+2OkJ6qoqxWqqLQp1IeV5TyYEi8/+56Ze/fI7/KGL0+9nU4uto77o2nz2sbLhRplV1I=
+  file_glob: true
   file:
-    - "/home/travis/linux-image-4.3.0-axellankap-buildbasterd_4.3.0-17_armhf.deb"
-    - "/home/travis/linux-firmware-image-4.3.0-axellankap-buildbasterd_4.3.0-17_armhf.deb"
-    - "/home/travis/linux-headers-4.3.0-axellankap-buildbasterd_4.3.0-17_armhf.deb"
-    - "/home/travis/linux-libc-dev_4.3.0-17_armhf.deb"
-    - "/home/travis/build_wifi_deb/build/rtl8723bs-mp-driver-modules-4.3.0-axellankap-buildbasterd_4.3.16-13854.20150410-BTCOEX20150119-5844-ntc-2+4.3.0-17_all.deb"
-    - "/home/travis/rtl8723bs-mp-driver-common_4.3.16-13854.20150410-BTCOEX20150119-5844-ntc-2_all.deb"
+    - /home/travis/*.deb
+    - /home/travis/build_wifi_deb/build/*.deb
 
   skip_cleanup: true
   on:
