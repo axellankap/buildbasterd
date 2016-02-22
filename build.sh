@@ -19,10 +19,11 @@ sudo apt-get -y install libc6-i386 lib32stdc++6 lib32z1
 wget -c https://releases.linaro.org/14.09/components/toolchain/binaries/gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux.tar.xz
 tar xf gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux.tar.xz
 #export CC="${PWD}/gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux/bin/arm-linux-gnueabihf-"
-export PATH="${PWD}/gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux/bin":"${PWD}/gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux/arm-linux-gnueabihf/bin/":"${PATH}"
+#export PATH="${PWD}/gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux/bin":"${PWD}/gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux/arm-linux-gnueabihf/bin/":"${PATH}"
+export PATH="${PWD}/gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux/bin":"${PATH}"
 
 #checkout Linux
-export LINUX_SRC=CHIP-linux
+export LINUX_SRC="${PWD}/CHIP-linux"
 export LINUX_BRANCH=debian/4.3.0-5
 git clone -b "${LINUX_BRANCH}" --single-branch --depth 1 https://github.com/NextThingCo/CHIP-linux
 
