@@ -12,6 +12,7 @@ export GIT_ORIGIN=$(git remote -v |head -n1|sed -r -e 's/.*(http(s)?:?\/\/|\w@)[
 export GIT_USER=${GIT_ORIGIN%/*}
 export GIT_REPO=${GIT_ORIGIN#*/}
 
+#install 32bit compatibility layers for Linaro Tool Chain:
 sudo apt-get -y install libc6-i386 lib32stdc++6 lib32z1
 
 #install Linaro Tool Chain:
@@ -19,13 +20,6 @@ wget -c https://releases.linaro.org/14.09/components/toolchain/binaries/gcc-lina
 tar xf gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux.tar.xz
 #export CC="${PWD}/gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux/bin/arm-linux-gnueabihf-"
 export PATH="${PWD}/gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux/bin":"${PWD}/gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux/arm-linux-gnueabihf/bin/":"${PATH}"
-which arm-linux-gnueabihf-gcc
-arm-linux-gnueabihf-gcc --version
-arm-linux-gnueabihf-gcc-4.9.2 --version
-
-ls -l ${PWD}/gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux/bin/arm-linux-gnueabihf-gcc
-ls -l ${PWD}/gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux/bin/arm-linux-gnueabihf-gcc-4.9.2
-exit 1
 
 #checkout Linux
 export LINUX_SRC=CHIP-linux
