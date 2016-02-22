@@ -16,8 +16,8 @@ deploy:
   file_glob: true
   file:
     - "${TRAVIS_BUILD_DIR}/*.deb"
-    - "${TRAVIS_BUILD_DIR}/build_wifi_deb/build/*.deb"
-    - "${TRAVIS_BUILD_DIR}/build_wifi_deb/*.deb"
+    - "${HOME}/build_wifi_deb/build/*.deb"
+    - "${HOME}/build_wifi_deb/*.deb"
 #    - "${TRAVIS_BUILD_DIR}/linux-firmware-image-${KERNEL_VER}-${LOCALVERSION}_${KDEB_PKGVERSION}_armhf.deb"
 
   skip_cleanup: true

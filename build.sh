@@ -2,7 +2,7 @@
 
 set -x
 
-export BUILD_DIR="${TRAVIS_BUILD_DIR}"
+export BUILD_DIR=${PWD}
 export BUILD="${TRAVIS_BUILD_NUMBER}"
 
 export GIT_ORIGIN=$(git remote -v |head -n1|sed -r -e 's/.*(http(s)?:?\/\/|\w@)[A-Za-z0-9.]*[\/:]([^ ]*).*/\3/g; s/\.git//g')
@@ -51,29 +51,29 @@ ls -l ../*deb
 sudo apt-get -y install debhelper dkms module-assistant
 
 # build RTL8723BS source package
-mkdir "${BUILD_DIR}/build_wifi_deb"
-cd "${BUILD_DIR}/build_wifi_deb"
+mkdir ~/build_wifi_deb
+cd ~/build_wifi_deb
 git clone  https://github.com/NextThingCo/RTL8723BS
-cd "${BUILD_DIR}/build_wifi_deb/RTL8723BS"
+cd ~/build_wifi_deb/RTL8723BS
 git checkout -b debian origin/debian
 dpkg-buildpackage -A -uc -us -nc
 
 # install RTL8723BS source package
 export RTL_VER=$(cd $KERNEL_SRC/build_wifi_deb/RTL8723BS; dpkg-parsechangelog --show-field Version)
 
-sudo dpkg -i "${BUILD_DIR}/build_wifi_deb/rtl8723bs-mp-driver-source_${RTL_VER}_all.deb"
+sudo dpkg -i ~/build_wifi_deb/rtl8723bs-mp-driver-source_${RTL_VER}_all.deb
 
 #cross build .deb for RTL8723BS
-mkdir -p "${BUILD_DIR}"/build_wifi_deb/build/usr_src
-export WIFIBUILDDIR="${BUILD_DIR}"/build_wifi_deb/build
+mkdir -p ~/build_wifi_deb/build/usr_src
+export BUILDDIR=~/build_wifi_deb/build
 export CC=arm-linux-gnueabihf-gcc
 export $(dpkg-architecture -aarmhf)
 export CROSS_COMPILE=arm-linux-gnueabihf-
 
-cp -va /usr/src/modules/rtl8723bs-mp-driver/* "${BUILD_DIR}"/build_wifi_deb/build
-#cd  "${BUILD_DIR}"/build_wifi_deb/build/usr_src/modules/rtl8723bs-mp-driver
+cp -va /usr/src/modules/rtl8723bs-mp-driver/* ~/build_wifi_deb/build
+#cd  ~/build_wifi_deb/build/usr_src/modules/rtl8723bs-mp-driver
 
-m-a -t -u $WIFIBUILDDIR -l $KERNEL_VER -k $LINUX_SRC build rtl8723bs-mp-driver-source
+m-a -t -u $BUILDDIR -l $KERNEL_VER -k $LINUX_SRC build rtl8723bs-mp-driver-source
 
 echo $PWD
 ls -l ../*deb
