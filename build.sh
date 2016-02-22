@@ -12,6 +12,9 @@ export GIT_ORIGIN=$(git remote -v |head -n1|sed -r -e 's/.*(http(s)?:?\/\/|\w@)[
 export GIT_USER=${GIT_ORIGIN%/*}
 export GIT_REPO=${GIT_ORIGIN#*/}
 
+#install package necessary for compilation
+sudo apt-get install lzop
+
 #install 32bit compatibility layers for Linaro Tool Chain:
 sudo apt-get -y install libc6-i386 lib32stdc++6 lib32z1
 
@@ -40,4 +43,4 @@ export KDEB_PKGVERSION=$(cd $LINUX_SRC; make kernelversion)-${BUILD}
 export DEBFULLNAME="${GIT_USER}"
 export DEBEMAIL="${GIT_USER}@github.com"
 
-make -j4 deb-pkg
+make -j8 deb-pkg
