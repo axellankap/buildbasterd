@@ -13,7 +13,7 @@ export GIT_USER=${GIT_ORIGIN%/*}
 export GIT_REPO=${GIT_ORIGIN#*/}
 
 #install package necessary for compilation
-sudo apt-get install lzop
+sudo apt-get -y install lzop
 
 #install 32bit compatibility layers for Linaro Tool Chain:
 sudo apt-get -y install libc6-i386 lib32stdc++6 lib32z1
