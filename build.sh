@@ -45,8 +45,7 @@ export DEBEMAIL="${GIT_USER}@github.com"
 
 make -j8 deb-pkg
 
-ls -ltra
-
+ls -l ../*deb
 
 # install dependencies for RTL8723BS source package
 sudo apt-get -y install debhelper dkms module-assistant
@@ -72,7 +71,6 @@ export CROSS_COMPILE=arm-linux-gnueabihf-
 cp -a /usr/src/modules/rtl8723bs-mp-driver ~/build_wifi_deb/build
 cd  ~/build_wifi_deb/build/usr_src/modules/rtl8723bs-mp-driver
 
-m-a -t -u $BUILDDIR \
-  -l $KERNEL_VER \
-  -k $KERNEL_SRC \
-  build rtl8723bs-mp-driver-source
+m-a -t -u $BUILDDIR -l $KERNEL_VER -k $LINUX_SRC build rtl8723bs-mp-driver-source
+
+ls -l ../*deb
