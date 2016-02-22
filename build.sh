@@ -48,7 +48,7 @@ ls -ltra
 
 
 # install dependencies for RTL8723BS source package
-sudo apt-get -y install debhelper modules-assistant
+sudo apt-get -y install debhelper dkms module-assistant
 
 # build RTL8723BS source package
 mkdir ~/build_wifi_deb
