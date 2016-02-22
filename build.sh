@@ -30,7 +30,8 @@ export LINUX_BRANCH=debian/4.3.0-5
 git clone -b "${LINUX_BRANCH}" --single-branch --depth 1 https://github.com/NextThingCo/CHIP-linux
 
 # Build Linux .deb
-cd CHIP-linux
+cd "${LINUX_SRC}"
+export KERNEL_VER=$(cd $LINUX_SRC; make kernelversion)
 
 export ARCH=arm
 export KBUILD_DEBARCH=armhf
@@ -38,7 +39,7 @@ export CROSS_COMPILE=arm-linux-gnueabihf-
 export KDEB_CHANGELOG_DIST=jessie
 export LOCALVERSION=-${GIT_USER}-${GIT_REPO}
 
-export KDEB_PKGVERSION=$(cd $LINUX_SRC; make kernelversion)-${BUILD}
+export KDEB_PKGVERSION="${KERNEL_VER}-${BUILD}"
 export DEBFULLNAME="${GIT_USER}"
 export DEBEMAIL="${GIT_USER}@github.com"
 
@@ -67,7 +68,6 @@ export BUILDDIR=~/build_wifi_deb/build
 export CC=arm-linux-gnueabihf-gcc
 export $(dpkg-architecture -aarmhf)
 export CROSS_COMPILE=arm-linux-gnueabihf-
-export KERNEL_VER=$(cd $KERNEL_SRC; make kernelversion)
 
 cp -a /usr/src/modules/rtl8723bs-mp-driver ~/build_wifi_deb/build
 cd  ~/build_wifi_deb/build/usr_src/modules/rtl8723bs-mp-driver
