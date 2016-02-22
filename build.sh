@@ -2,6 +2,7 @@
 
 set -x
 
+export BUILD_DIR=${PWD}
 export BUILD="${TRAVIS_BUILD_NUMBER}"
 
 export GIT_ORIGIN=$(git remote -v |head -n1|sed -r -e 's/.*(http(s)?:?\/\/|\w@)[A-Za-z0-9.]*[\/:]([^ ]*).*/\3/g; s/\.git//g')
@@ -74,4 +75,5 @@ cp -va /usr/src/modules/rtl8723bs-mp-driver/* ~/build_wifi_deb/build
 
 m-a -t -u $BUILDDIR -l $KERNEL_VER -k $LINUX_SRC build rtl8723bs-mp-driver-source
 
+echo $PWD
 ls -l ../*deb
