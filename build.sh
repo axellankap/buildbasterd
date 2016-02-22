@@ -12,6 +12,7 @@ export GIT_ORIGIN=$(git remote -v |head -n1|sed -r -e 's/.*(http(s)?:?\/\/|\w@)[
 export GIT_USER=${GIT_ORIGIN%/*}
 export GIT_REPO=${GIT_ORIGIN#*/}
 
+sudo apt-get -y install libc6-i386 lib32stdc++6 lib32z1
 
 #install Linaro Tool Chain:
 wget -c https://releases.linaro.org/14.09/components/toolchain/binaries/gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux.tar.xz
