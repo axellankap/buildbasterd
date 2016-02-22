@@ -9,6 +9,7 @@ export GIT_USER=${GIT_ORIGIN%/*}
 export GIT_REPO=${GIT_ORIGIN#*/}
 
 
+
 #install package necessary for compilation
 sudo apt-get -y install lzop
 
@@ -18,8 +19,6 @@ sudo apt-get -y install libc6-i386 lib32stdc++6 lib32z1
 #install Linaro Tool Chain:
 wget -c https://releases.linaro.org/14.09/components/toolchain/binaries/gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux.tar.xz
 tar xf gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux.tar.xz
-#export CC="${PWD}/gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux/bin/arm-linux-gnueabihf-"
-#export PATH="${PWD}/gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux/bin":"${PWD}/gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux/arm-linux-gnueabihf/bin/":"${PATH}"
 export PATH="${PWD}/gcc-linaro-arm-linux-gnueabihf-4.9-2014.09_linux/bin":"${PATH}"
 
 
@@ -59,7 +58,9 @@ git checkout -b debian origin/debian
 dpkg-buildpackage -A -uc -us -nc
 
 # install RTL8723BS source package
-sudo dpkg -i ~/build_wifi_deb/rtl8723bs-mp-driver-source_4.3.16-13854.20150410-BTCOEX20150119-5844-ntc-2_all.deb
+export RTL_VER=$(cd $KERNEL_SRC/build_wifi_deb/RTL8723BS; dpkg-parsechangelog --show-field Version)
+
+sudo dpkg -i ~/build_wifi_deb/rtl8723bs-mp-driver-source_${RTL_VER}_all.deb
 
 #cross build .deb for RTL8723BS
 mkdir -p ~/build_wifi_deb/build/usr_src
@@ -68,8 +69,8 @@ export CC=arm-linux-gnueabihf-gcc
 export $(dpkg-architecture -aarmhf)
 export CROSS_COMPILE=arm-linux-gnueabihf-
 
-cp -a /usr/src/modules/rtl8723bs-mp-driver ~/build_wifi_deb/build
-cd  ~/build_wifi_deb/build/usr_src/modules/rtl8723bs-mp-driver
+cp -va /usr/src/modules/rtl8723bs-mp-driver/* ~/build_wifi_deb/build
+#cd  ~/build_wifi_deb/build/usr_src/modules/rtl8723bs-mp-driver
 
 m-a -t -u $BUILDDIR -l $KERNEL_VER -k $LINUX_SRC build rtl8723bs-mp-driver-source
 
